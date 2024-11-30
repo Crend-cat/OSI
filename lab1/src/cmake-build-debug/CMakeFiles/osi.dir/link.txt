@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2023.2.4\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\osi.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~2.4\bin\mingw\bin\ar.exe qc CMakeFiles\osi.dir/objects.a @CMakeFiles\osi.dir\objects1.rsp
+C:\PROGRA~1\JETBRA~1\CLION2~2.4\bin\mingw\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\osi.dir/objects.a -Wl,--no-whole-archive -o osi.exe -Wl,--out-implib,libosi.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\osi.dir\linkLibs.rsp

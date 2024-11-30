@@ -1,0 +1,3 @@
+C:/Users/User/OSI/cmake-build-debug/CMakeFiles/OSI.dir
+C:/Users/User/OSI/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/User/OSI/cmake-build-debug/CMakeFiles/rebuild_cache.dir
