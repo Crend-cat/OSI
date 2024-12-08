@@ -63,7 +63,7 @@ int main(int argc, char *argv[]){
         if (bytes_read == -1) {
             write(STDERR_FILENO, "Error reading from pipe\n", 24);
             exit(EXIT_FAILURE);
-            write(STDOUT_FILENO, buf, bytes_read);
+            //write(STDOUT_FILENO, buf, bytes_read);
         }
 
         close(channel[0]); // close read

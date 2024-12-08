@@ -7,5 +7,5 @@ add_executable(OSI
         lab1/src/child.c
         lab1/src/parent.c
         lab2/src/child.c
-        lab2/src/parent.c
+        lab2/src/main2.c
 )

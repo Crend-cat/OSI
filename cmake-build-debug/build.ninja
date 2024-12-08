@@ -67,8 +67,8 @@ build CMakeFiles/OSI.dir/lab2/src/child.c.obj: C_COMPILER__OSI_unscanned_Debug C
   OBJECT_DIR = CMakeFiles\OSI.dir
   OBJECT_FILE_DIR = CMakeFiles\OSI.dir\lab2\src
 
-build CMakeFiles/OSI.dir/lab2/src/parent.c.obj: C_COMPILER__OSI_unscanned_Debug C$:/Users/User/OSI/lab2/src/parent.c || cmake_object_order_depends_target_OSI
-  DEP_FILE = CMakeFiles\OSI.dir\lab2\src\parent.c.obj.d
+build CMakeFiles/OSI.dir/lab2/src/main2.c.obj: C_COMPILER__OSI_unscanned_Debug C$:/Users/User/OSI/lab2/src/main2.c || cmake_object_order_depends_target_OSI
+  DEP_FILE = CMakeFiles\OSI.dir\lab2\src\main2.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\OSI.dir
   OBJECT_FILE_DIR = CMakeFiles\OSI.dir\lab2\src
@@ -81,7 +81,7 @@ build CMakeFiles/OSI.dir/lab2/src/parent.c.obj: C_COMPILER__OSI_unscanned_Debug 
 #############################################
 # Link the executable OSI.exe
 
-build OSI.exe: C_EXECUTABLE_LINKER__OSI_Debug CMakeFiles/OSI.dir/lab1/src/child.c.obj CMakeFiles/OSI.dir/lab1/src/parent.c.obj CMakeFiles/OSI.dir/lab2/src/child.c.obj CMakeFiles/OSI.dir/lab2/src/parent.c.obj
+build OSI.exe: C_EXECUTABLE_LINKER__OSI_Debug CMakeFiles/OSI.dir/lab1/src/child.c.obj CMakeFiles/OSI.dir/lab1/src/parent.c.obj CMakeFiles/OSI.dir/lab2/src/child.c.obj CMakeFiles/OSI.dir/lab2/src/main2.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\OSI.dir
