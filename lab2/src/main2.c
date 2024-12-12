@@ -5,7 +5,6 @@
 #include <time.h>
 
 
-
 #define ROWS 5
 #define COLS 5
 
@@ -29,8 +28,8 @@ void copy_temp_to_matrix();
 void generate_matrix();
 void print_matrix(double mat[ROWS][COLS]);
 
-sem_t start_sem;
-sem_t end_sem;
+sem_t start_sem; // управляет началом работы потоков
+sem_t end_sem;  // уведомляет главный поток о завершении всех потоков
 
 int stop_threads = 0;
 
@@ -68,14 +67,21 @@ int main(int argc, char* argv[]) {
     ThreadArgs thread_args[max_threads];
     int rows_per_thread = ROWS / max_threads;
 
-    sem_init(&start_sem, 0, 0);
-    sem_init(&end_sem, 0, 0);
+    if (sem_init(&start_sem, 0, 0) != 0){
+        perror("Failed to initialize start_sem");
+        return EXIT_FAILURE;
+    }
+    if(sem_init(&end_sem, 0, 0) != 0){
+        perror("Failed to initialize end_sem");
+        return EXIT_FAILURE;
+    }
 
     for (int i = 0; i < max_threads; i++) {
         thread_args[i].start_row = i * rows_per_thread;
         thread_args[i].end_row = (i == max_threads - 1) ? ROWS : (i + 1) * rows_per_thread;
         thread_args[i].window_size = window_size;
 
+        // создаем потоки которые будут выполнять f filters с аргументами thread_args[i] (инфа для каждого потока)
         if (pthread_create(&threads[i], NULL, filters, &thread_args[i]) != 0) {
             perror("pthread_create failed");
             return EXIT_FAILURE;
@@ -88,15 +94,21 @@ int main(int argc, char* argv[]) {
     // Основной цикл
     for (int iter = 0; iter < iterations; iter++) {
 
-        for (int i = 0; i < max_threads; i++) {
-            sem_post(&start_sem); // увеличиваем значение семафора
+        for (int i = 0; i < max_threads; i++) { // старт потоков
+            if (sem_post(&start_sem) != 0) {
+                perror("sem_post failed");
+                return EXIT_FAILURE;
+            } // увеличиваем значение семафора
         }
 
 
 
 
-        for (int i = 0; i < max_threads; i++) {
-            sem_wait(&end_sem);  // уменьшаем значение семафора
+        for (int i = 0; i < max_threads; i++) { // тормозим
+            if (sem_wait(&start_sem) != 0) {
+                perror("sem_wit failed");
+                return EXIT_FAILURE;
+            }  // уменьшаем значение семафора
         }
 
     }
@@ -104,13 +116,22 @@ int main(int argc, char* argv[]) {
     // Останавливаем потоки
     stop_threads = 1;
     for (int i = 0; i < max_threads; i++) {
-        sem_post(&start_sem);
+        if (sem_post(&start_sem) != 0) {
+            perror("sem_post failed");
+            return EXIT_FAILURE; // стратуем и останавливаем потоки
+        }
     }
 
 
     for (int i = 0; i < max_threads; i++) {
-        pthread_join(threads[i], NULL);
-    }
+        if (pthread_join(threads[i], NULL) != 0) {
+            perror("pthread_join failed");
+            return EXIT_FAILURE;
+        }
+    }// главный поток пока каждый поток завершится
+
+
+
 
     sem_destroy(&start_sem);
     sem_destroy(&end_sem);
