@@ -55,7 +55,9 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4,
+				5
 			]
 		}
 	],
@@ -95,7 +97,9 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4,
+				5
 			]
 		}
 	],
@@ -123,6 +127,18 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "lab2/src/main2.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "lab3/src/child.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "lab3/src/parent.c",
 			"sourceGroupIndex" : 0
 		}
 	],

@@ -8,4 +8,6 @@ add_executable(OSI
         lab1/src/parent.c
         lab2/src/child.c
         lab2/src/main2.c
+        lab3/src/child.c
+        lab3/src/parent.c
 )
