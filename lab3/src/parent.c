@@ -59,25 +59,26 @@ int main(int argc, char *argv[]) {
 
     pid_t pid = fork();
     if (pid == 0) {
-        // Child process
+        // Child
         execl("./child", "./child", NULL);
         write(STDERR_FILENO, "Error executing child process\n", 30);
         exit(EXIT_FAILURE);
     } else if (pid > 0) {
-        // Parent process
+        // Parent
         char buffer[BUF_SIZE];
         while (fgets(buffer, sizeof(buffer), file) != NULL) {
             sem_wait(sem_write);
             strncpy(shm_ptr, buffer, BUF_SIZE);
             sem_post(sem_read);
         }
-        // Indicate end of input
+        // End of input
         sem_wait(sem_write);
         shm_ptr[0] = '\0';
         sem_post(sem_read);
 
         wait(NULL);
         fclose(file);
+
     } else {
         write(STDERR_FILENO, "Error with fork\n", 16);
         fclose(file);

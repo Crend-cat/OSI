@@ -29,6 +29,11 @@ enum Errors Str_to_int(char *str, int *answer, int line) {
     return OK;
 }
 
+void remove_carriage_return(char *str) {
+    char *ptr = strchr(str, '\r');
+    if (ptr) *ptr = '\0';
+}
+
 int main() {
     int shm_fd = shm_open(SHM_NAME, O_RDWR, 0666);
     if (shm_fd == -1) {
@@ -56,6 +61,7 @@ int main() {
             break;
         }
 
+        remove_carriage_return(shm_ptr);  // Удаляем '\r' перед обработкой
         char *token = strtok(shm_ptr, " ");
         int line_sum = 0;
         int valid_line = 1;
@@ -72,8 +78,6 @@ int main() {
 
         if (valid_line) {
             printf("Sum in %d line = %d\n", line, line_sum);
-        } else {
-            fprintf(stderr, "Error processing line %d\n", line);
         }
 
         line++;
