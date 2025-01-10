@@ -72,7 +72,7 @@ static void *fallback_allocator_alloc(Allocator *const allocator, const size_t s
 }
 
 static void fallback_allocator_free(Allocator *const allocator, void *const memory)
-{ //освобождения памяти ( по факту ничего не делает)
+{ //освобождения памяти
     (void)allocator;
     (void)memory;
 }
@@ -192,7 +192,7 @@ void test_reuse_blocks(Allocator *allocator, size_t total_size)
 }
 
 void test_alloc_and_free_time(Allocator *allocator)
-{ // измерение времени при создании и освобождении 10 тыш блоков
+{ // измерение времени при создании и освобождении 100 тыш блоков
     clock_t start, stop;
     double cpu_time_used;
     if (!allocator)
@@ -293,8 +293,8 @@ int main(int argc, char *argv[])
     size_t _MEM_USED = 0;
     void *library = NULL;
 
-    if (argc == 1)
-    {
+    if (argc == 1){
+
         char msg[] = "The path to the library has not been transmitted, enabling backup functions.\n";
         write(STDOUT_FILENO, msg, sizeof(msg));
 

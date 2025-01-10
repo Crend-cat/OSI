@@ -60,7 +60,7 @@ EXPORT void allocator_destroy(Allocator *const allocator){
 #endif
 }
 
-// Функция для поиска свободного блока (Best-Fit)
+// Функция для поиска свободного блока
 static block_header *find_free_block(Allocator *const allocator, size_t size){
 
     if (allocator == NULL || allocator->free_list_head == NULL)

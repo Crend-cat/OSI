@@ -47,8 +47,8 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    sem_t *sem_write = sem_open(SEM_WRITE, 0);
-    sem_t *sem_read = sem_open(SEM_READ, 0);
+    sem_t *sem_write = sem_open(SEM_WRITE, O_CREAT, 0);
+    sem_t *sem_read = sem_open(SEM_READ, O_CREAT, 0);
     if (sem_write == SEM_FAILED || sem_read == SEM_FAILED) {
         perror("Error opening semaphores");
         exit(EXIT_FAILURE);
@@ -61,7 +61,7 @@ int main() {
             break;
         }
 
-        remove_carriage_return(shm_ptr);  // Удаляем '\r' перед обработкой
+        remove_carriage_return(shm_ptr);  // Удаляем '\r'
         char *token = strtok(shm_ptr, " ");
         int line_sum = 0;
         int valid_line = 1;
